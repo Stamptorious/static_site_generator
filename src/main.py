@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 
 from content_copy import content_copier
 from gencontent import generate_pages_recursive
@@ -11,6 +12,8 @@ template_path = "./template.html"
 
 
 def main():
+    if len(sys.argv) > 1:
+        base_path = sys.argv[1]
     print("Deleting public directory...")
     if os.path.exists(dir_path_public):
         shutil.rmtree(dir_path_public)
@@ -23,6 +26,7 @@ def main():
         dir_path_content,
         template_path,
         dir_path_public,
+        base_path,
     )
 
 
