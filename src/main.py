@@ -15,6 +15,7 @@ def main():
     base_path = "/"
     if len(sys.argv) > 1:
         base_path = sys.argv[1]
+    print(f"Using basepath: {base_path}")
     print("Deleting docs directory...")
     if os.path.exists(dir_path_public):
         shutil.rmtree(dir_path_public)
