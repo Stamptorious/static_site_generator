@@ -22,10 +22,10 @@ class HTMLNode:
     
 class LeafNode(HTMLNode):
     def __init__(self, tag, value, props=None):
-        super().__init__(tag, value, props)
+        super().__init__(tag, value, None, props)
         
     def to_html(self):
-        if not self.value:
+        if self.value == None:
             raise ValueError("Must have a value")
         if not self.tag:
             return f"{self.value}"

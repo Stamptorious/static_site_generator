@@ -1,6 +1,10 @@
 import unittest
 
-from textnode import TextNode, TextType
+from textnode import *
+
+from htmlnode import *
+
+from split_nodes import *
 
 
 class TestTextNode(unittest.TestCase):
@@ -67,6 +71,24 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(html_node.value, "")
         self.assertEqual(html_node.props, {"src": "https://www.image.com", "alt": "my alt text"})
 
+class TestTextToTextNode(unittest.TestCase):
+
+    def test_text_to_text_nodes(self):
+        node_text = "This **is** a _text_ node `test` ok ![image](https://www.image.com/example) yep [link](https://www.example.com)"
+        new_nodes = text_to_text_nodes(node_text)
+        self.assertEqual(new_nodes,
+                         [TextNode("This ", TextType.TEXT),
+                          TextNode("is", TextType.BOLD),
+                          TextNode(" a ", TextType.TEXT),
+                          TextNode("text", TextType.ITALIC),
+                          TextNode(" node ", TextType.TEXT),
+                          TextNode("test", TextType.CODE),
+                          TextNode(" ok ", TextType.TEXT),
+                          TextNode("image", TextType.IMAGE, "https://www.image.com/example"),
+                          TextNode(" yep ", TextType.TEXT),
+                          TextNode("link", TextType.LINK, "https://www.example.com")
+                          ]
+                         )
 
 if __name__ == "__main__":
     unittest.main()

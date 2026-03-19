@@ -1,7 +1,8 @@
 from enum import Enum
 
-from htmlnode import *
 
+
+from htmlnode import *
 class TextType(Enum):
     TEXT = "text"
     BOLD = "bold"
@@ -40,3 +41,4 @@ def text_node_to_html_node(text_node):
     elif TextType.IMAGE == text_node.text_type:
         return LeafNode("img", "", {"src": text_node.url, "alt": text_node.text})
     else: raise ValueError(f"invalid text type: {text_node.text_type}")
+
